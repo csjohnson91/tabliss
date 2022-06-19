@@ -15,10 +15,14 @@ const Quote: React.FC<Props> = ({
 }) => {
   useCachedEffect(
     () => {
-      getQuote(loader, data.category ?? "inspire").then(setCache);
+      const randomCategoryIndex = Math.floor(
+        Math.random() * data.categories.length,
+      );
+      const randomCategory = data.categories[randomCategoryIndex];
+      getQuote(loader, randomCategory ?? "inspire").then(setCache);
     },
     cache ? cache.timestamp + EXPIRE_IN : 0,
-    [data.category],
+    [data.categories],
   );
 
   if (!cache) {

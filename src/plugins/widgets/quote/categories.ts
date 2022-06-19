@@ -1,4 +1,4 @@
-export default [
+export const dailyCategories = [
   {
     key: "inspire",
     name: "Inspiring",
@@ -35,4 +35,11 @@ export default [
     key: "bible",
     name: "Bible Verses",
   },
-];
+] as const;
+
+export const hourlyCategories = [
+  {
+    key: "developerexcuses",
+    name: "Developer Excuses",
+  },
+] as const;

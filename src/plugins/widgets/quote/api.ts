@@ -1,5 +1,10 @@
 import { API } from "../../types";
-import { Quote } from "./types";
+import {
+  Quote,
+  QuoteCategory,
+  TSSBibleResponse,
+  TSSQuoteResponse,
+} from "./types";
 
 // Get developer excuse
 async function getDeveloperExcuse() {
@@ -22,7 +27,7 @@ async function getQuoteOfTheDay(category?: string) {
   const res = await fetch(
     "https://quotes.rest/qod.json" + (category ? `?category=${category}` : ""),
   );
-  const body = await res.json();
+  const body: TSSQuoteResponse = await res.json();
 
   if (res.status === 429) {
     return {
@@ -53,7 +58,7 @@ async function getQuoteOfTheDay(category?: string) {
 async function getBibleVerse() {
   const res = await fetch("https://quotes.rest/bible/vod.json");
 
-  const body = await res.json();
+  const body: TSSBibleResponse = await res.json();
 
   if (res.status === 429) {
     return {
@@ -82,7 +87,7 @@ async function getBibleVerse() {
 
 export async function getQuote(
   loader: API["loader"],
-  category: string,
+  category: QuoteCategory,
 ): Promise<Quote> {
   loader.push();
 
